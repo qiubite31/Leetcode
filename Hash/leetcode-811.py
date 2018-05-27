@@ -55,9 +55,37 @@ class Solution(object):
         output_list = ['{} {}'.format(v, k) for k, v in all_visit_times.items()]
         return output_list
 
+    def subdomainVisits2(self, cpdomains):
+        """
+        :type cpdomains: List[str]
+        :rtype: List[str]
+        """
+        from collections import Counter
+        domain_counter = Counter()
+        
+        for cpdomain in cpdomains:
+            # 拆開次數與domain
+            visit_times = int(cpdomain.split(' ')[0])
+            domain = cpdomain.split(' ')[1]
+
+            # 用字典儲存各sub_domain的次數
+            sub_domain_dict = {}
+            sub_domain_dict[domain] = visit_times
+
+            # 拆出sub_domain加入字典
+            sub_domain = domain
+            while '.' in sub_domain:
+                sub_domain = sub_domain.split('.', 1)[1]
+                sub_domain_dict[sub_domain] = visit_times
+
+            # 轉成Counter後直接相加
+            domain_counter += Counter(sub_domain_dict)
+
+        return ['{} {}'.format(v, k) for k, v in domain_counter.items()]
+
 
 input = ["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"]
 solution = Solution()
-output = solution.subdomainVisits(input)
+output = solution.subdomainVisits2(input)
 
 print(output)
