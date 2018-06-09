@@ -46,12 +46,12 @@ class Solution:
         def traversal(root):
             if not root:
                 return []
-            
+
             return traversal(root.left) + [root.val] + traversal(root.right)
-        
+
         flatten_nums = traversal(root)
         # print(flatten_nums)
-        
+
         i = 0
         j = len(flatten_nums)-1
         while i < j:
@@ -61,7 +61,7 @@ class Solution:
                 i = i + 1
             else:
                 j = j - 1
-                
+
         return False
 
 
