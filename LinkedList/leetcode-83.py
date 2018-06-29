@@ -31,18 +31,12 @@ class Solution:
         curr_node = head
         # head = curr_node
         while curr_node is not None:    
-            if prev_node and curr_node:
-                if prev_node.val == curr_node.val:
-                    prev_node.next = curr_node.next
-                    curr_node = curr_node.next
-                else:
-                    prev_node = curr_node
-                    curr_node = curr_node.next
-                    
+            if prev_node and curr_node and prev_node.val == curr_node.val:
+                prev_node.next = curr_node.next
             else:
                 prev_node = curr_node
-                curr_node = curr_node.next
             
+            curr_node = curr_node.next
             
         return head
 
